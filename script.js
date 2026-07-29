@@ -14,7 +14,7 @@ const modalImage = document.getElementById('modalImage');
 const modalDownload = document.getElementById('modalDownload');
 const closeModal = document.getElementById('closeModal');
 
-let theme = 'Light'; // or 'Dark'
+let theme = 'Light';
 
 function rawUrl(folder, name){
   return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${folder}/${encodeURIComponent(name)}`;
@@ -23,6 +23,7 @@ function rawUrl(folder, name){
 function buildCard(folder, name){
   const card = document.createElement('div');
   card.className = 'card';
+
   const img = document.createElement('img');
   img.className = 'thumb';
   img.src = rawUrl(folder, name);
@@ -33,6 +34,7 @@ function buildCard(folder, name){
 
   const meta = document.createElement('div');
   meta.className = 'meta';
+
   const title = document.createElement('div');
   title.className = 'name';
   title.textContent = name.replace(/\.[^/.]+$/, '');
@@ -42,20 +44,25 @@ function buildCard(folder, name){
 
   const dl = document.createElement('a');
   dl.href = rawUrl(folder, name);
-  dl.target = '_blank';
+  dl.download = name;
   dl.textContent = 'Download';
   dl.setAttribute('aria-label', `Download ${name}`);
+
   actions.appendChild(dl);
 
   meta.appendChild(title);
   meta.appendChild(actions);
+
   card.appendChild(meta);
+
   return card;
 }
 
 function render(){
   gallery.innerHTML = '';
+
   const folder = theme === 'Light' ? 'Light' : 'Dark';
+
   filenames.forEach(name => {
     gallery.appendChild(buildCard(folder, name));
   });
@@ -63,26 +70,35 @@ function render(){
 
 themeToggle.addEventListener('change', (e) => {
   theme = e.target.checked ? 'Dark' : 'Light';
+
   document.body.classList.toggle('theme-dark', theme === 'Dark');
   themeLabel.textContent = theme;
+
   render();
 });
 
 // modal handlers
 function openModal(folder, name){
   modalImage.src = rawUrl(folder, name);
+
   modalDownload.href = rawUrl(folder, name);
+  modalDownload.download = name;
   modalDownload.textContent = 'Download';
+
   modal.setAttribute('aria-hidden', 'false');
 }
+
 function closeModalFn(){
   modal.setAttribute('aria-hidden', 'true');
   modalImage.src = '';
 }
+
 closeModal.addEventListener('click', closeModalFn);
+
 modal.addEventListener('click', (e) => {
   if(e.target === modal) closeModalFn();
 });
+
 document.addEventListener('keydown', (e) => {
   if(e.key === 'Escape') closeModalFn();
 });
@@ -90,5 +106,4 @@ document.addEventListener('keydown', (e) => {
 // initialize
 document.addEventListener('DOMContentLoaded', () => {
   render();
-  // default is Light (unchecked). If you want Dark default, set themeToggle.checked = true;
 });
