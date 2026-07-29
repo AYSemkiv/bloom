@@ -1,14 +1,20 @@
 // script.js — populates the gallery and handles interactions
-const owner = "AYSemkiv";
-const repo = "bloom_wallpapers";
-const branch = "main";
 
-// filenames present in Light/ and Dark/ directories
-const filenames = ["Blue.png","Copilot+.png","Cyan.png","Green.png","Original.png","Pink.png","Purple.png","Red.png"];
+const filenames = [
+  "Blue.png",
+  "Copilot+.png",
+  "Cyan.png",
+  "Green.png",
+  "Original.png",
+  "Pink.png",
+  "Purple.png",
+  "Red.png"
+];
 
 const gallery = document.getElementById('gallery');
 const themeToggle = document.getElementById('themeToggle');
 const themeLabel = document.getElementById('themeLabel');
+
 const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modalImage');
 const modalDownload = document.getElementById('modalDownload');
@@ -16,11 +22,11 @@ const closeModal = document.getElementById('closeModal');
 
 let theme = 'Light';
 
-function rawUrl(folder, name){
-  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${folder}/${encodeURIComponent(name)}`;
+function rawUrl(folder, name) {
+  return `${folder}/${encodeURIComponent(name)}`;
 }
 
-function buildCard(folder, name){
+function buildCard(folder, name) {
   const card = document.createElement('div');
   card.className = 'card';
 
@@ -29,7 +35,9 @@ function buildCard(folder, name){
   img.src = rawUrl(folder, name);
   img.alt = name;
   img.loading = 'lazy';
+
   img.addEventListener('click', () => openModal(folder, name));
+
   card.appendChild(img);
 
   const meta = document.createElement('div');
@@ -58,7 +66,7 @@ function buildCard(folder, name){
   return card;
 }
 
-function render(){
+function render() {
   gallery.innerHTML = '';
 
   const folder = theme === 'Light' ? 'Light' : 'Dark';
@@ -71,14 +79,17 @@ function render(){
 themeToggle.addEventListener('change', (e) => {
   theme = e.target.checked ? 'Dark' : 'Light';
 
-  document.body.classList.toggle('theme-dark', theme === 'Dark');
+  document.body.classList.toggle(
+    'theme-dark',
+    theme === 'Dark'
+  );
+
   themeLabel.textContent = theme;
 
   render();
 });
 
-// modal handlers
-function openModal(folder, name){
+function openModal(folder, name) {
   modalImage.src = rawUrl(folder, name);
 
   modalDownload.href = rawUrl(folder, name);
@@ -88,7 +99,7 @@ function openModal(folder, name){
   modal.setAttribute('aria-hidden', 'false');
 }
 
-function closeModalFn(){
+function closeModalFn() {
   modal.setAttribute('aria-hidden', 'true');
   modalImage.src = '';
 }
@@ -96,14 +107,17 @@ function closeModalFn(){
 closeModal.addEventListener('click', closeModalFn);
 
 modal.addEventListener('click', (e) => {
-  if(e.target === modal) closeModalFn();
+  if (e.target === modal) {
+    closeModalFn();
+  }
 });
 
 document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape') closeModalFn();
+  if (e.key === 'Escape') {
+    closeModalFn();
+  }
 });
 
-// initialize
 document.addEventListener('DOMContentLoaded', () => {
   render();
 });
