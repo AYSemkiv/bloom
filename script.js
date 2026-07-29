@@ -1,15 +1,6 @@
 // script.js — populates the gallery and handles interactions
 
-const filenames = [
-  "Blue.png",
-  "Copilot+.png",
-  "Cyan.png",
-  "Green.png",
-  "Original.png",
-  "Pink.png",
-  "Purple.png",
-  "Red.png"
-];
+let wallpapers = {};
 
 const gallery = document.getElementById('gallery');
 const themeToggle = document.getElementById('themeToggle');
@@ -71,7 +62,7 @@ function render() {
 
   const folder = theme === 'Light' ? 'Light' : 'Dark';
 
-  filenames.forEach(name => {
+  wallpapers[folder].forEach(name => {
     gallery.appendChild(buildCard(folder, name));
   });
 }
@@ -118,6 +109,14 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  render();
-});
+// Load wallpaper list
+fetch("wallpapers.json")
+  .then(response => response.json())
+  .then(data => {
+    wallpapers = data;
+    render();
+  })
+  .catch(error => {
+    console.error("Failed to load wallpapers.json:", error);
+    gallery.innerHTML = "<p>Failed to load wallpapers.</p>";
+  });
