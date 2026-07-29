@@ -3,8 +3,13 @@
   --fg:#111;
   --muted:#666;
   --accent:#7a5cff;
+  --card:#f7f7f8;
+  --button-text:#fff;
+  --border:#eee;
 }
+
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -13,43 +18,231 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-.container{max-width:980px;margin:0 auto;padding:24px}
-.site-header{padding:28px 0;border-bottom:1px solid #eee}
-.site-header h1{margin:0;font-size:1.6rem}
-.tagline{margin:6px 0;color:var(--muted)}
-.controls{display:flex;align-items:center;gap:10px;margin-top:12px}
-.switch{position:relative;display:inline-block;width:46px;height:26px}
-.switch input{opacity:0;width:0;height:0}
-.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:999px;transition:.2s}
-.slider:before{content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
-.switch input:checked + .slider{background:var(--accent)}
-.switch input:checked + .slider:before{transform:translateX(20px)}
 
-.intro{padding:18px 0;color:var(--muted)}
+.container{
+  max-width:980px;
+  margin:0 auto;
+  padding:24px
+}
 
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;padding:8px 0}
-.card{background:linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.02));border-radius:10px;overflow:hidden;display:flex;flex-direction:column;align-items:stretch}
-.thumb{width:100%;height:160px;object-fit:cover;display:block;cursor:pointer}
-.card .meta{padding:10px;display:flex;justify-content:space-between;align-items:center}
-.card .meta .name{font-size:.95rem}
-.card .meta .actions a{margin-left:8px;text-decoration:none;padding:6px 8px;border-radius:6px;background:var(--accent);color:#fff;font-size:.85rem}
+.site-header{
+  padding:28px 0;
+  border-bottom:1px solid var(--border)
+}
 
-.credits{margin:28px 0;color:var(--muted);font-size:.95rem}
+.site-header h1{
+  margin:0;
+  font-size:1.6rem
+}
+
+.tagline{
+  margin:6px 0;
+  color:var(--muted)
+}
+
+.controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:12px
+}
+
+.switch{
+  position:relative;
+  display:inline-block;
+  width:46px;
+  height:26px
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0
+}
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#ccc;
+  border-radius:999px;
+  transition:.2s
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  height:20px;
+  width:20px;
+  left:3px;
+  top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s
+}
+
+.switch input:checked + .slider{
+  background:var(--accent)
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(20px)
+}
+
+.intro{
+  padding:18px 0;
+  color:var(--muted)
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;
+  padding:8px 0
+}
+
+.card{
+  background:var(--card);
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+}
+
+.thumb{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+  cursor:pointer
+}
+
+.card .meta{
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.card .meta .name{
+  font-size:.95rem
+}
+
+.card .meta .actions a,
+.generator-btn,
+.modal-download{
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:8px;
+  background:var(--accent);
+  color:var(--button-text);
+  font-size:.85rem;
+  font-weight:600;
+  transition:.2s;
+}
+
+.card .meta .actions a:hover,
+.generator-btn:hover,
+.modal-download:hover{
+  filter:brightness(1.12);
+}
+
+.credits{
+  margin:28px 0;
+  color:var(--muted);
+  font-size:.95rem
+}
 
 /* Generator download */
-.generator-download{margin:24px 0;padding:16px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.01));display:flex;flex-direction:column;gap:12px}
-.generator-btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+.generator-download{
+  margin:24px 0;
+  padding:16px;
+  border-radius:10px;
+  background:var(--card);
+  display:flex;
+  flex-direction:column;
+  gap:12px
+}
+
+.generator-btn{
+  display:inline-block;
+}
 
 /* Modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:999}
-.modal[aria-hidden="false"]{display:flex}
-.modal img{max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.5)}
-.modal-close{position:absolute;top:18px;right:18px;background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer}
-.modal-download{position:absolute;right:18px;bottom:18px;background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.6);
+  z-index:999
+}
 
-/* Dark theme overrides */
-body.theme-dark{--bg:#0b0b0d;--fg:#e7e7ea;--muted:#9aa0a6;--accent:#9ab1ff}
-body.theme-dark .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
+.modal[aria-hidden="false"]{
+  display:flex
+}
+
+.modal img{
+  max-width:90vw;
+  max-height:80vh;
+  border-radius:8px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5)
+}
+
+.modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  background:transparent;
+  border:0;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer
+}
+
+.modal-download{
+  position:absolute;
+  right:18px;
+  bottom:18px
+}
+
+
+/* Dark theme */
+body.theme-dark{
+  --bg:#0b0b0d;
+  --fg:#e7e7ea;
+  --muted:#9aa0a6;
+  --accent:#8da7ff;
+  --card:#151519;
+  --button-text:#0b0b0d;
+  --border:#25252a;
+}
+
+body.theme-dark .card,
+body.theme-dark .generator-download{
+  background:var(--card);
+}
+
+body.theme-dark .card .meta .actions a,
+body.theme-dark .generator-btn,
+body.theme-dark .modal-download{
+  background:#8da7ff;
+  color:#0b0b0d;
+}
+
+body.theme-dark .card .meta .actions a:hover,
+body.theme-dark .generator-btn:hover,
+body.theme-dark .modal-download:hover{
+  background:#b3c5ff;
+}
+
 @media (max-width:480px){
-  .thumb{height:120px}
+  .thumb{
+    height:120px
+  }
 }
