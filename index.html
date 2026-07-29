@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bloom Wallpapers — Light & Dark</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Bloom Wallpapers</h1>
+      <p class="tagline">Beautiful minimalist wallpapers — light and dark variants.</p>
+      <div class="controls">
+        <label class="switch">
+          <input id="themeToggle" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span id="themeLabel">Light</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p>Choose a color and preview or download the full-resolution wallpaper. Files are hosted in this repository.</p>
+    </section>
+
+    <section id="gallery" class="gallery"></section>
+
+    <section class="credits">
+      <p>Created by <a href="https://github.com/AYSemkiv" target="_blank" rel="noopener">AYSemkiv</a>. Source on <a href="https://github.com/AYSemkiv/bloom_wallpapers" target="_blank" rel="noopener">GitHub</a>.</p>
+    </section>
+  </main>
+
+  <!-- Modal viewer -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <button id="closeModal" class="modal-close" aria-label="Close">×</button>
+    <img id="modalImage" alt="Wallpaper preview" />
+    <a id="modalDownload" class="modal-download" target="_blank" rel="noopener">Download</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
